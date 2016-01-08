@@ -184,10 +184,10 @@ public class CellGridCanvas extends Canvas {
 		g.drawImage(offScreenImageDrawed, 0, 0, null);
 		// draw populated cells
 		g.setColor(Color.yellow);
-		Enumeration enum = cellGrid.getEnum();
+		Enumeration enums = cellGrid.getEnum();
 		Cell c;
-		while ( enum.hasMoreElements() ) {
-			c = (Cell)enum.nextElement();
+		while ( enums.hasMoreElements() ) {
+			c = (Cell)enums.nextElement();
 			g.fillRect(c.col * cellSize, c.row * cellSize, cellSize - 1, cellSize - 1);
 		}
 	}

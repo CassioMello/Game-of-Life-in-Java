@@ -64,23 +64,23 @@ public class GameOfLifeGrid implements CellGrid {
 		Cell cell;
 		int col, row;
 		int neighbours;
-		Enumeration enum;
+		Enumeration enums;
 
 		generations++;
 		nextShape.clear();
 
 		// Reset cells
-		enum = currentShape.keys();
-		while ( enum.hasMoreElements() ) {
-			cell = (Cell) enum.nextElement();
+		enums = currentShape.keys();
+		while ( enums.hasMoreElements() ) {
+			cell = (Cell) enums.nextElement();
 			cell.neighbour = 0;
 		}
 		// Add neighbours
 		// You can't walk through an hashtable and also add elements. Took me a couple of ours to figure out. Argh!
 		// That's why we have a hashNew hashtable.
-		enum = currentShape.keys();
-		while ( enum.hasMoreElements() ) {
-			cell = (Cell) enum.nextElement();
+		enums = currentShape.keys();
+		while ( enums.hasMoreElements() ) {
+			cell = (Cell) enums.nextElement();
 			col = cell.col;
 			row = cell.row;
 			addNeighbour( col-1, row-1 );
@@ -95,18 +95,18 @@ public class GameOfLifeGrid implements CellGrid {
 		
 		// Bury the dead
 		// We are walking through an enum from we are also removing elements. Can be tricky.
-		enum = currentShape.keys();
-		while ( enum.hasMoreElements() ) {
-			cell = (Cell) enum.nextElement();
+		enums = currentShape.keys();
+		while ( enums.hasMoreElements() ) {
+			cell = (Cell) enums.nextElement();
 			// Here is the Game Of Life rule (1):
 			if ( cell.neighbour != 3 && cell.neighbour != 2 ) {
 				currentShape.remove( cell );
 			}
 		}
 		// Bring out the new borns
-		enum = nextShape.keys();
-		while ( enum.hasMoreElements() ) {
-			cell = (Cell) enum.nextElement();
+		enums = nextShape.keys();
+		while ( enums.hasMoreElements() ) {
+			cell = (Cell) enums.nextElement();
 			// Here is the Game Of Life rule (2):
 			if ( cell.neighbour == 3 ) {
 				setCell( cell.col, cell.row, true );
@@ -216,11 +216,11 @@ public class GameOfLifeGrid implements CellGrid {
 		int colOffset = (cellColsNew-cellCols)/2;
 		int rowOffset = (cellRowsNew-cellRows)/2;
 		Cell cell;
-		Enumeration enum;
+		Enumeration enums;
 		nextShape.clear();
-		enum = currentShape.keys();
-		while ( enum.hasMoreElements() ) {
-			cell = (Cell) enum.nextElement();
+		enums = currentShape.keys();
+		while ( enums.hasMoreElements() ) {
+			cell = (Cell) enums.nextElement();
 			int colNew = cell.col + colOffset;
 			int rowNew = cell.row + rowOffset;
 			try {
@@ -233,9 +233,9 @@ public class GameOfLifeGrid implements CellGrid {
 		// Copy new grid and hashtable to working grid/hashtable
 		grid = gridNew;
 		currentShape.clear();
-		enum = nextShape.keys();
-		while ( enum.hasMoreElements() ) {
-			cell = (Cell) enum.nextElement();
+		enums = nextShape.keys();
+		while ( enums.hasMoreElements() ) {
+			cell = (Cell) enums.nextElement();
 			currentShape.put( cell, cell );
 		}
 		
